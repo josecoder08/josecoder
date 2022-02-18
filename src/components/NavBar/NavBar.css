@@ -1,0 +1,9 @@
+ul{
+    background-color: lightblue;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+ul li{
+    margin: 0 20px;
+}
