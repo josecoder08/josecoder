@@ -6,6 +6,7 @@ import ComponenteContenedor from './components/ComponenteContedor/ComponenteCont
 import ComponenteImagen from './components/IconoCart'
 import TituloApp from './components/Titulo/TituloApp'
 import ItemListContainer from './containers/ItemListContiner/ItemListContainer'
+import ItemDetailContainer from './containers/ItemDetailContainer/ItemDetailContainer';
 
 function App() {
   const tit = 'Este titulo viene de app' // estado
@@ -20,6 +21,7 @@ function App() {
             </InputApp> 
             <ComponenteContenedor saludo='hola soy componente contenedor' />
             <ItemListContainer greeting='soy ITEMLISTCONTAINER' />
+            <ItemDetailContainer/>
     </div>
   );
 }
