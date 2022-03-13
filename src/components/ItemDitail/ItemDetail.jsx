@@ -1,4 +1,5 @@
 
+
 const ItemDetail = ({producto}) => {
   return (
     <div>

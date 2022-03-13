@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { useParams } from "react-router-dom"
 import ItemCount from "../../components/ItemCount/ItemCount"
 import Itemlist from "../../components/Itemlist/Itemlist"
 import  getFetch  from "../../helpers/getFetch"
@@ -8,17 +9,37 @@ function ItemListContainer( {greeting} )  {
   const [productos, setProductos] = useState([])
   const [loading, setLoading] = useState(true)
   
+  const {categoriasId} = useParams()
+    
   useEffect(() => {
-    getFetch// llamada a la api
-    .then((respuesta)=> {
-      //throw new Error('Esto es un error')
-      //console.log(respuesta) //json  convierto a objeto js
-      return respuesta
-    })
-    .then((resp) => setProductos(resp))
-    .catch(err => console.log(err))
-    .finally(()=> setLoading(false))    
-  }, [])
+    if (categoriasId) {
+      getFetch// llamada a la api
+      .then((respuesta)=> {
+        //throw new Error('Esto es un error')
+        //console.log(respuesta) //json  convierto a objeto js
+        return respuesta
+      })
+      .then((resp) => setProductos(resp.filter(pro=>pro.categoria===categoriasId)))
+      .catch(err => console.log(err))
+      .finally(()=> setLoading(false)) 
+      
+    } else {
+      getFetch// llamada a la api
+      .then((respuesta)=> {
+        //throw new Error('Esto es un error')
+        //console.log(respuesta) //json  convierto a objeto js
+        return respuesta
+      })
+      .then((resp) => setProductos(resp))
+      .catch(err => console.log(err))
+      .finally(()=> setLoading(false)) 
+      
+    }
+    
+      
+  }, [categoriasId])
+
+  console.log(categoriasId)
   
     const onAdd = (cant) => {
        console.log(cant) 
