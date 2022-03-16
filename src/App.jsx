@@ -9,8 +9,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  const tit = 'Este titulo viene de app' // estado
-    const saludo = () => console.log('saludo de app')
+ 
   return (
     <BrowserRouter>
       <div className="App"> 

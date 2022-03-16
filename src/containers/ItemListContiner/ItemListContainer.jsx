@@ -39,13 +39,13 @@ function ItemListContainer( {greeting} )  {
       
   }, [categoriasId])
 
-  console.log(categoriasId)
+  
   
     const onAdd = (cant) => {
        console.log(cant) 
     }
 
-  console.log(productos)
+  console.log(categoriasId)
   return (
       // [1,2,3,4] => nuevo arra [<li>1</li>, ....]
       <>
