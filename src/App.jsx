@@ -7,13 +7,16 @@ import Cart from './components/Cart/Cart';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import CartContextProvider from './containers/Context/CartContext';
+
 
 function App() {
  
   return (
-    <BrowserRouter>
-      <div className="App"> 
-       <Navbar/>
+    <CartContextProvider>
+      <BrowserRouter>
+        <div className="App"> 
+          <Navbar/>
             <Routes> 
               <Route path='/detalle/:detalleId' element={<ItemDetailContainer/>}/>
               <Route path='/Cart' element={<Cart/>}/>
@@ -21,8 +24,11 @@ function App() {
               <Route path='/categoria/:categoriasId' element={<ItemListContainer greeting='soy ITEMLISTCONTAINER' />}/>
               <Route path='/*' element={<Navigate to='/' replace/>}/>
             </Routes>
-      </div>
-     </BrowserRouter>
+        </div>
+      </BrowserRouter>
+    </CartContextProvider>
+   
+     
   );
 }
 
