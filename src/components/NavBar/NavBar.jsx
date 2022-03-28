@@ -1,8 +1,10 @@
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap"
 import { NavLink } from "react-router-dom"
+import { useCartContext } from "../../containers/Context/CartContext"
 
 
 function NavBar() {
+  const{cantidadTotalItem}= useCartContext()
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
@@ -23,6 +25,7 @@ function NavBar() {
             <Nav>
             {/* <Nav.Link href="#deets">More deets</Nav.Link> */}
             <NavLink to="Cart">
+              {cantidadTotalItem()!== 0&& cantidadTotalItem()}
                 Carrito
             </NavLink> 
             
