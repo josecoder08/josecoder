@@ -1,9 +1,59 @@
+import { useState } from "react"
 import { useCartContext } from "../../containers/Context/CartContext"
 import { Link } from "react-router-dom"
-
+import { 
+	addDoc, 
+	collection, 
+	getFirestore, 
+	
+  } from "firebase/firestore"
 
 function Cart() {
+	const [dataForm, setDataForm] = useState({
+		email: '', name: '', phone: ''
+	  })
+	  const [id, setId] = useState('')
     const {cartlist,vaciarCart,removeItem,precioTotal} = useCartContext()
+
+	// fucntion {}
+    const generarOrden= async (e)=>{
+		e.preventDefault();
+		// Nuevo objeto de orders    
+		let orden = {}      
+  
+		orden.buyer = dataForm
+		orden.total = precioTotal();
+  
+		orden.items = cartlist.map(cartItem => {
+			const id = cartItem.id;
+			const nombre = cartItem.name;
+			const precio = cartItem.price * cartItem.cantidad;
+			
+			return {id, nombre, precio}   
+		})
+		console.log(orden)
+  
+		// crear
+  
+		const db = getFirestore()
+		const queryCollectionSet = collection(db, 'orders')
+		addDoc(queryCollectionSet, orden)
+		.then(resp => setId(resp.id))
+		.catch(err => console.error(err))
+		.finally(() => console.log('termino '))
+	}
+
+
+    const handleChange = (e) => {
+        setDataForm({
+          ...dataForm,
+          [e.target.name]: e.target.value
+      })
+    }
+
+
+    console.log(dataForm)
+
     console.log(cartlist)
     cartlist.forEach((item) => {
 		console.log(item)
@@ -31,7 +81,7 @@ function Cart() {
 						</>
 					)}
             </div> 
-            cart
+			{id.length !== '' && `el id de la compra es: ${id}`}
            { cartlist.map (item=> <>
 		                         <li key={item.id}>
 			                       Nombre:{item.name} Precio:{item.price} Cantidad:{item.cantidad}
@@ -42,6 +92,33 @@ function Cart() {
 		   }
            <button onClick={vaciarCart}>vaciar Cart</button>
            <h3>Total a pagar: ${total}</h3>
+		   <form 
+                onSubmit={generarOrden}                 
+            >
+                <input 
+                    type='text' 
+                    name='name' 
+                    placeholder='name' 
+                    value={dataForm.name}
+                    onChange={handleChange}
+                /><br />
+                <input 
+                    type='text' 
+                    name='phone'
+                    placeholder='tel' 
+                    value={dataForm.phone}
+                    onChange={handleChange}
+                /><br/>
+                <input 
+                    type='email' 
+                    name='email'
+                    placeholder='email' 
+                    value={dataForm.email}
+                    onChange={handleChange}
+                /><br/>
+                {/* <button>Generar Orden</button> */}
+                <button>Terminar Compra</button>
+            </form>
 		   
             </div>
             
