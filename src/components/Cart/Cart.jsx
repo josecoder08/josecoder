@@ -7,6 +7,7 @@ import {
 	getFirestore, 
 	
   } from "firebase/firestore"
+import '../Cart/Cart.css';
 
 function Cart() {
 	const [dataForm, setDataForm] = useState({
@@ -28,8 +29,7 @@ function Cart() {
 			const id = cartItem.id;
 			const nombre = cartItem.name;
 			const precio = cartItem.price * cartItem.cantidad;
-			
-			return {id, nombre, precio}   
+			return {id, nombre, precio}  
 		})
 		console.log(orden)
   
@@ -66,34 +66,43 @@ function Cart() {
 
 		total += price}
     return(
-        <div>
+        <div className="espacio"> 
            <div>
             {cartlist.length === 0 && (
 						<>
-							<h3>Parece que no hay productos en el carrito,</h3>
+							<h3>Parece que no hay productos en el carrito...</h3>
 							<Link
 								to="/" 
 								className="btn bg-principal text-white d-block w-100 mt-3 fw-bolder fs-5"	
 							>
 								<i className="ps-3 fas fa-smile-wink fs-5"></i>
-								<button onClick={"/"}>ir al mercado</button>
+								<button onClick={"/"}>volver al mercado</button>
 							</Link>
 						</>
 					)}
             </div> 
-			{id.length !== '' && `el id de la compra es: ${id}`}
+			
            { cartlist.map (item=> <>
 		                         <li key={item.id}>
 			                       Nombre:{item.name} Precio:{item.price} Cantidad:{item.cantidad}
 			                     </li>
+								 <img src={item.foto} alt='' className='w-25' />
 								 <button onClick={()=>removeItem(item.id)}>eliminar item</button><hr />
 								 </>
 						  ) 
 		   }
+		    {cartlist.length !== 0 && (
+				<>
            <button onClick={vaciarCart}>vaciar Cart</button>
            <h3>Total a pagar: ${total}</h3>
+		   </>
+		   )}
+
+{cartlist.length !== 0 && (
+				<>
 		   <form 
-                onSubmit={generarOrden}                 
+                onSubmit={generarOrden}   
+				            
             >
                 <input 
                     type='text' 
@@ -117,13 +126,18 @@ function Cart() {
                     onChange={handleChange}
                 /><br/>
                 {/* <button>Generar Orden</button> */}
+				<br />
                 <button>Terminar Compra</button>
             </form>
-		   
+			  <br />
+			{id.length !== '' && `el id de la compra es: ${id}`}
+			</>
+			 )}
+			
             </div>
-            
+             
     )
-    
+	
     }
     
 export default  Cart

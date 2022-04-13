@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
-import ItemCount from "../../components/ItemCount/ItemCount"
 import Itemlist from "../../components/Itemlist/Itemlist"
 import { collection, getDocs,getFirestore, where ,query}from 'firebase/firestore'
-import  getFetch  from "../../helpers/getFetch"
+import '../ItemListContiner/ItemListContainer.css';
+
 
 
 function ItemListContainer( {greeting} )  {
@@ -70,14 +70,17 @@ useEffect(()=>{
   return (
       // [1,2,3,4] => nuevo arra [<li>1</li>, ....]
       <>
-            <h1>{ greeting }</h1>
+      <div className="item">
+      <h1>{ greeting }</h1>
             {   loading ? <h1>Cargando...</h1>
                 :
-                <Itemlist productos= {productos} />
+                < Itemlist productos= {productos} />
                 
             
                                          
             }
+      </div>
+            
            
         </>
     )}

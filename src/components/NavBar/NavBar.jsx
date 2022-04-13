@@ -1,6 +1,7 @@
-import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap"
+import { Container, Nav, Navbar } from "react-bootstrap"
 import { NavLink } from "react-router-dom"
 import { useCartContext } from "../../containers/Context/CartContext"
+import '../NavBar/NavBar.css';
 
 
 function NavBar() {
@@ -8,25 +9,21 @@ function NavBar() {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-        <NavLink to="/">React-Bootstrap</NavLink>
+        <NavLink to="/" className='nav'>inicio</NavLink>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
-            <NavLink to="categoria/gorras">gorras</NavLink>
-            <NavLink to="categoria/remeras">remeras</NavLink>
-            <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">R7</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">R5</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">R3</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-            </NavDropdown>
+            <Nav className="me-auto" >
+            <NavLink to="categoria/gorras" className='nav'>Gorras</NavLink>
+            <NavLink to="categoria/remeras"className='nav' >Remeras</NavLink>
+            <NavLink to="categoria/zapatillas"className='nav' >Zapatillas</NavLink>
+            <NavLink to="categoria/pantalones"className='nav'>Pantalones</NavLink>
+           
             </Nav>
             <Nav>
             {/* <Nav.Link href="#deets">More deets</Nav.Link> */}
-            <NavLink to="Cart">
+            <NavLink to="Cart" className="numero">
               {cantidadTotalItem()!== 0&& cantidadTotalItem()}
-                Carrito
+              <img src="https://thumbs.dreamstime.com/b/icono-de-carro-compras-en-fondo-negro-ilustración-vectores-estilo-plano-170442802.jpg" alt="cart" width={50} height={50}/>  
             </NavLink> 
             
             </Nav>

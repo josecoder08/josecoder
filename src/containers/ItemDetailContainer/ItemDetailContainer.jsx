@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import ItemDetail from '../../components/ItemDitail/ItemDetail'
 import {getDoc, getFirestore ,doc}from 'firebase/firestore'
-import getFetch from '../../helpers/getFetch'
+
 
 const ItemDetailContainer = () => {
     const [producto, setproducto] = useState({})

@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useCartContext } from "../../containers/Context/CartContext"
-import { productos } from "../../helpers/getFetch"
 import ItemCount from "../ItemCount/ItemCount"
 
 
@@ -15,8 +14,12 @@ const ItemDetail = ({producto}) => {
 }
 console.log(cartlist)
   return (
-    <div>
-        {producto.name}
+    <div className="espacio"> 
+
+       Nombre: {producto.name} <br />
+       Precio: {producto.price} <br />
+        Detalle:{producto.descripcion} <br />
+        <img src={producto.foto} alt='imágen' className='w-25' />
         {count ? 
               
           <Link to= '/Cart' >
